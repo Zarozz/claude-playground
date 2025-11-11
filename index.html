@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Japan Travel Guide - Personal Recommendations</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        #map {
+            width: 100%;
+            height: 500px;
+            border-bottom: 4px solid #e74c3c;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .location {
+            margin-bottom: 40px;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            border-left: 5px solid #e74c3c;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .location:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .location h2 {
+            color: #e74c3c;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+            display: flex;
+            align-items: center;
+        }
+
+        .location h2::before {
+            content: "📍";
+            margin-right: 10px;
+        }
+
+        .location h3 {
+            color: #555;
+            margin: 20px 0 10px 0;
+            font-size: 1.3em;
+        }
+
+        .location p {
+            margin-bottom: 15px;
+            color: #666;
+            line-height: 1.8;
+        }
+
+        .highlight {
+            background: #fff3cd;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #ffc107;
+            margin: 15px 0;
+        }
+
+        .highlight strong {
+            color: #856404;
+        }
+
+        .link-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #e74c3c;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 10px;
+            transition: background 0.3s ease;
+        }
+
+        .link-button:hover {
+            background: #c0392b;
+        }
+
+        .tips {
+            background: #d4edda;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #28a745;
+            margin-top: 30px;
+        }
+
+        .tips h2 {
+            color: #155724;
+            margin-bottom: 15px;
+        }
+
+        .tips h2::before {
+            content: "💡";
+            margin-right: 10px;
+        }
+
+        .legend {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 40px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .legend h3 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin: 8px 0;
+        }
+
+        .legend-marker {
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+
+        .highly-recommended {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .recommended {
+            background: #3498db;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .location {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🇯🇵 Japan Travel Guide</h1>
+            <p>Personal Recommendations & Tips</p>
+        </header>
+
+        <div id="map"></div>
+
+        <div class="legend">
+            <h3>Map Legend</h3>
+            <div class="legend-item">
+                <div class="legend-marker highly-recommended">⭐</div>
+                <span>Highly Recommended</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-marker recommended">📌</div>
+                <span>Recommended</span>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="location">
+                <h2>Hiroshima</h2>
+
+                <h3>Miyajima Island ⭐</h3>
+                <p>
+                    This is an absolute must-visit! Located in the Bay of Hiroshima, Miyajima Island offers:
+                </p>
+                <ul style="margin-left: 20px; margin-bottom: 15px; color: #666;">
+                    <li>Numerous beautiful temples to explore</li>
+                    <li>Charming old township with authentic Japanese atmosphere</li>
+                    <li>Abundant food options perfect for tourists</li>
+                    <li>Option to hike or take cable car to the island's summit</li>
+                    <li>Breathtaking panoramic views of the entire bay and city from the top</li>
+                </ul>
+                <a href="https://www.japan-guide.com/e/e3401.html" class="link-button" target="_blank">View on Japan Guide →</a>
+            </div>
+
+            <div class="location">
+                <h2>Osaka ⭐</h2>
+                <p>
+                    An incredible city for food lovers and nightlife enthusiasts! Osaka has an amazing energy and endless options for entertainment.
+                </p>
+
+                <h3>Dontonbori Area (Recommended Stay)</h3>
+                <div class="highlight">
+                    <strong>Pro Tip:</strong> Stay in the Dontonbori area so you can easily walk around and explore!
+                </div>
+                <p>
+                    This area is absolutely mind-blowing - it's essentially a suburb with countless tiny streets, and every single street is packed with small restaurants and bars. The sheer endlessness of options is incredible, and you'll be amazed by how many unique spots there are to discover.
+                </p>
+
+                <h3>Round1 Games Arcade</h3>
+                <p>
+                    If you want to embrace your inner child, the Round1 games arcade in Osaka is unreal! A must-visit for gaming and entertainment enthusiasts.
+                </p>
+            </div>
+
+            <div class="location">
+                <h2>Kyoto</h2>
+                <p>
+                    Kyoto is definitely worth visiting, but be prepared for crowds - it's <em>very</em> busy. Consider doing a day trip from Osaka to avoid the hassle of changing accommodations.
+                </p>
+                <div class="highlight">
+                    <strong>Note:</strong> While you can find similar temples elsewhere with fewer tourists, Kyoto's unique advantage is the concentration of temples all located close to each other - which explains its massive popularity.
+                </div>
+            </div>
+
+            <div class="location">
+                <h2>Nagoya & The Magome Pass</h2>
+                <p>
+                    Consider stopping in Nagoya (accessible via Shinkansen) for a couple of nights to experience the historic Magome Pass.
+                </p>
+
+                <h3>Magome Pass Walk</h3>
+                <p>
+                    This is an old trade route through the mountains connecting two beautifully preserved traditional villages. The experience includes:
+                </p>
+                <ul style="margin-left: 20px; margin-bottom: 15px; color: #666;">
+                    <li>A scenic mountain walk with stunning views</li>
+                    <li>Two authentic old-style villages at each end</li>
+                    <li>Interesting local culture and architecture</li>
+                    <li>Excellent food options and unique trinkets</li>
+                </ul>
+                <a href="https://www.japan-guide.com/e/e6078.html" class="link-button" target="_blank">View on Japan Guide →</a>
+            </div>
+
+            <div class="location">
+                <h2>Tokyo</h2>
+
+                <h3>Where to Stay: Akasaka Area ⭐</h3>
+                <div class="highlight">
+                    <strong>Recommended Location:</strong> The area between Akasaka-Mitsuke Station and Akasaka Station
+                </div>
+                <p>
+                    After extensive research, this area stands out as the best spot to stay in Tokyo:
+                </p>
+                <ul style="margin-left: 20px; margin-bottom: 15px; color: #666;">
+                    <li><strong>Excellent connectivity:</strong> Access to 4 metro lines</li>
+                    <li><strong>Central location:</strong> Easy to reach all major Tokyo attractions</li>
+                    <li><strong>Not overly busy:</strong> More peaceful than hyper-touristy areas</li>
+                    <li><strong>Great restaurants:</strong> Plenty of dining options within walking distance</li>
+                    <li><strong>Convenient:</strong> Take trains to explore during the day, easily find dinner near your accommodation at night</li>
+                </ul>
+                <p style="color: #666; font-style: italic;">
+                    This area was absolutely awesome and made exploring Tokyo so much easier!
+                </p>
+            </div>
+
+            <div class="tips">
+                <h2>Important Tips</h2>
+
+                <h3>Hotel Size Warning ⚠️</h3>
+                <p>
+                    Many hotels in central Tokyo and Osaka are <strong>extremely small</strong> (space-efficient Japanese style).
+                </p>
+                <p>
+                    For example, APA Hotels (a fairly large chain) often have rooms that are basically just a bed against one wall with minimal space to sit or move around. This is fine if you're out exploring all day, but not ideal if you want to relax in your room or are staying for an extended period.
+                </p>
+                <div class="highlight">
+                    <strong>Recommendation:</strong> Always check the actual room size and dimensions when booking your accommodation!
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize the map centered on Japan
+        const map = L.map('map').setView([35.5, 136.5], 6);
+
+        // Add OpenStreetMap tiles
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Custom icon for highly recommended places
+        const redIcon = L.divIcon({
+            className: 'custom-div-icon',
+            html: "<div style='background-color:#e74c3c; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 16px; border: 2px solid white; box-shadow: 0 2px 5px rgba(0,0,0,0.3);'>⭐</div>",
+            iconSize: [30, 30],
+            iconAnchor: [15, 15]
+        });
+
+        // Custom icon for recommended places
+        const blueIcon = L.divIcon({
+            className: 'custom-div-icon',
+            html: "<div style='background-color:#3498db; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 16px; border: 2px solid white; box-shadow: 0 2px 5px rgba(0,0,0,0.3);'>📌</div>",
+            iconSize: [30, 30],
+            iconAnchor: [15, 15]
+        });
+
+        // Add markers for each location
+        const locations = [
+            {
+                name: "Miyajima Island, Hiroshima",
+                coords: [34.2958, 132.3197],
+                icon: redIcon,
+                description: "Highly recommended! Temples, old township, hiking, amazing bay views."
+            },
+            {
+                name: "Osaka - Dontonbori",
+                coords: [34.6688, 135.5010],
+                icon: redIcon,
+                description: "Highly recommended! Endless restaurants and bars. Stay in this area. Visit Round1 arcade."
+            },
+            {
+                name: "Kyoto",
+                coords: [35.0116, 135.7681],
+                icon: blueIcon,
+                description: "Beautiful temples but very busy. Consider a day trip from Osaka."
+            },
+            {
+                name: "Nagoya - Magome Pass",
+                coords: [35.5326, 137.5989],
+                icon: blueIcon,
+                description: "Historic trade route through mountains. Beautiful walk between old villages."
+            },
+            {
+                name: "Tokyo - Akasaka Area",
+                coords: [35.6747, 139.7377],
+                icon: redIcon,
+                description: "Highly recommended area to stay! Well connected (4 metro lines), central, great restaurants."
+            }
+        ];
+
+        locations.forEach(location => {
+            L.marker(location.coords, { icon: location.icon })
+                .addTo(map)
+                .bindPopup(`<strong>${location.name}</strong><br>${location.description}`);
+        });
+
+        // Fit map to show all markers
+        const group = L.featureGroup(locations.map(loc => L.marker(loc.coords))).addTo(map);
+        map.fitBounds(group.getBounds().pad(0.1));
+    </script>
+</body>
+</html>
