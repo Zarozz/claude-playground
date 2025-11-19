@@ -182,6 +182,231 @@
             color: white;
         }
 
+        /* Itinerary Timeline Styles */
+        .itinerary-section {
+            background: #f8f9fa;
+            padding: 40px;
+        }
+
+        .itinerary-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .itinerary-header h2 {
+            color: #e74c3c;
+            font-size: 2.2em;
+            margin-bottom: 10px;
+        }
+
+        .itinerary-header h2::before {
+            content: "🗺️";
+            margin-right: 15px;
+        }
+
+        .itinerary-header p {
+            color: #666;
+            font-size: 1.1em;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50px;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, #e74c3c, #c0392b);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 50px;
+            padding-left: 100px;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 35px;
+            top: 0;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #e74c3c;
+            border: 4px solid white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            z-index: 2;
+        }
+
+        .timeline-travel {
+            position: relative;
+            margin: 30px 0;
+            padding-left: 100px;
+            font-style: italic;
+            color: #666;
+        }
+
+        .timeline-travel::before {
+            content: "🚄";
+            position: absolute;
+            left: 38px;
+            font-size: 20px;
+            background: white;
+            padding: 5px;
+            border-radius: 50%;
+        }
+
+        .stop-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .stop-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .stop-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .stop-title {
+            font-size: 1.8em;
+            color: #e74c3c;
+            margin-bottom: 5px;
+        }
+
+        .stop-dates {
+            background: #e74c3c;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .hotel-info {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 4px solid #ddd;
+        }
+
+        .hotel-info h4 {
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+
+        .hotel-recommended {
+            border-left-color: #28a745;
+            background: #d4edda;
+        }
+
+        .hotel-recommended .recommendation {
+            color: #155724;
+            font-weight: bold;
+        }
+
+        .hotel-not-recommended {
+            border-left-color: #dc3545;
+            background: #f8d7da;
+        }
+
+        .hotel-not-recommended .recommendation {
+            color: #721c24;
+            font-weight: bold;
+        }
+
+        .hotel-neutral {
+            border-left-color: #ffc107;
+            background: #fff3cd;
+        }
+
+        .hotel-neutral .recommendation {
+            color: #856404;
+            font-weight: bold;
+        }
+
+        .hotel-name {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .activities {
+            margin-top: 20px;
+        }
+
+        .activities h4 {
+            color: #555;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .activity-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .activity-list li {
+            padding: 10px 15px;
+            margin: 8px 0;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 3px solid #3498db;
+            transition: all 0.2s ease;
+        }
+
+        .activity-list li:hover {
+            background: #e9ecef;
+            transform: translateX(5px);
+        }
+
+        .activity-list li::before {
+            content: "✓";
+            color: #3498db;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .must-see {
+            border-left-color: #e74c3c;
+        }
+
+        .must-see::before {
+            content: "⭐";
+        }
+
+        .food-note {
+            background: #fff3cd;
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            border-left: 3px solid #ffc107;
+        }
+
+        .food-note::before {
+            content: "🍜 ";
+        }
+
         @media (max-width: 768px) {
             header h1 {
                 font-size: 1.8em;
@@ -193,6 +418,34 @@
 
             .location {
                 padding: 20px;
+            }
+
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-item {
+                padding-left: 60px;
+            }
+
+            .timeline-dot {
+                left: 5px;
+            }
+
+            .timeline-travel {
+                padding-left: 60px;
+            }
+
+            .timeline-travel::before {
+                left: 8px;
+            }
+
+            .stop-header {
+                flex-direction: column;
+            }
+
+            .stop-dates {
+                margin-top: 10px;
             }
         }
     </style>
@@ -209,12 +462,171 @@
         <div class="legend">
             <h3>Map Legend</h3>
             <div class="legend-item">
+                <div class="legend-marker" style="background: #9b59b6; color: white; font-weight: bold;">1-4</div>
+                <span>Itinerary Route (numbered stops)</span>
+            </div>
+            <div class="legend-item">
                 <div class="legend-marker highly-recommended">⭐</div>
                 <span>Highly Recommended</span>
             </div>
             <div class="legend-item">
                 <div class="legend-marker recommended">📌</div>
                 <span>Recommended</span>
+            </div>
+        </div>
+
+        <div class="itinerary-section">
+            <div class="itinerary-header">
+                <h2>Sample Itinerary</h2>
+                <p>Our 18-day journey through Japan - October 2023</p>
+            </div>
+
+            <div class="timeline">
+                <!-- Tokyo -->
+                <div class="timeline-item">
+                    <div class="timeline-dot">1</div>
+                    <div class="stop-card">
+                        <div class="stop-header">
+                            <div>
+                                <h3 class="stop-title">Tokyo</h3>
+                                <p style="color: #666;">Arrival: Narita Airport</p>
+                            </div>
+                            <div class="stop-dates">Oct 1 - 7 (6 nights)</div>
+                        </div>
+
+                        <div class="hotel-info hotel-not-recommended">
+                            <h4>🏨 Accommodation</h4>
+                            <p class="hotel-name">APA Hotel Akasaka Mitsuke</p>
+                            <p class="recommendation">⚠️ Not Recommended - Very small rooms, just a bed against the wall with minimal space</p>
+                            <p style="margin-top: 8px; color: #155724; font-weight: 500;">✓ Location is excellent though - Akasaka-Mitsuke area is great for food and transport</p>
+                        </div>
+
+                        <div class="activities">
+                            <h4>Things to Do</h4>
+                            <ul class="activity-list">
+                                <li class="must-see">Visit Senso-ji Temple in Asakusa</li>
+                                <li class="must-see">Explore Shibuya Crossing and surrounding areas</li>
+                                <li class="must-see">Experience Tsukiji Outer Market for fresh sushi</li>
+                                <li class="must-see">Walk through Meiji Shrine and Yoyogi Park</li>
+                                <li class="must-see">Check out teamLab Borderless or Planets digital art museum</li>
+                            </ul>
+                        </div>
+
+                        <div class="food-note">
+                            <strong>Area Highlights:</strong> The food around Akasaka-Mitsuke is fantastic! The area isn't too busy and it's extremely well connected with 4 metro lines making it easy to explore Tokyo during the day and find great restaurants near your hotel at night.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-travel">
+                    <strong>Travel:</strong> Shinkansen (bullet train) to Nagoya
+                </div>
+
+                <!-- Nagoya -->
+                <div class="timeline-item">
+                    <div class="timeline-dot">2</div>
+                    <div class="stop-card">
+                        <div class="stop-header">
+                            <div>
+                                <h3 class="stop-title">Nagoya</h3>
+                            </div>
+                            <div class="stop-dates">Oct 7 - 9 (2 nights)</div>
+                        </div>
+
+                        <div class="hotel-info hotel-recommended">
+                            <h4>🏨 Accommodation</h4>
+                            <p class="hotel-name">Comfort Inn Nagoya Sakae</p>
+                            <p class="recommendation">✓ Recommended - Great hotel with good amenities</p>
+                        </div>
+
+                        <div class="activities">
+                            <h4>Things to Do</h4>
+                            <ul class="activity-list">
+                                <li class="must-see">Hike the Magome Pass - Historic trade route through the mountains between two beautiful old villages. Very scenic walk with interesting townships at both ends offering good food and traditional crafts</li>
+                            </ul>
+                        </div>
+
+                        <div class="food-note">
+                            <strong>Food:</strong> Lots of great restaurants around the hotel area.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-travel">
+                    <strong>Travel:</strong> Shinkansen to Hiroshima
+                </div>
+
+                <!-- Hiroshima -->
+                <div class="timeline-item">
+                    <div class="timeline-dot">3</div>
+                    <div class="stop-card">
+                        <div class="stop-header">
+                            <div>
+                                <h3 class="stop-title">Hiroshima</h3>
+                            </div>
+                            <div class="stop-dates">Oct 10 - 12 (2 nights)</div>
+                        </div>
+
+                        <div class="hotel-info hotel-recommended">
+                            <h4>🏨 Accommodation</h4>
+                            <p class="hotel-name">NAGI Hiroshima Hotel and Lounge</p>
+                            <p class="recommendation">⭐ Highly Recommended - One of the best hotels we stayed in! Beautiful property and wonderful experience</p>
+                        </div>
+
+                        <div class="activities">
+                            <h4>Things to Do</h4>
+                            <ul class="activity-list">
+                                <li class="must-see">Shukkeien Gardens - Absolutely incredible! A must-see. Beautiful Japanese garden with koi ponds and lakes. Buy fish food at the entrance to feed them - it's very fun watching them swarm!</li>
+                                <li class="must-see">Miyajima Island - Full day trip. Amazing temples, old township to explore, hike or take cable car to the top for stunning bay views</li>
+                                <li>Peace Memorial Park and Museums - Important historical site</li>
+                                <li>Hiroshima Castle - Nice to visit, we really enjoyed it</li>
+                                <li>Okonomiyaki Tower - Visit for lunch (especially on departure day). 4 floors of okonomiyaki restaurants! This is THE classic Hiroshima dish. Sit at the bar and watch them cook on the hotplate in front of you</li>
+                            </ul>
+                        </div>
+
+                        <div class="food-note">
+                            <strong>Food Highlights:</strong> Hotel is near lots of great restaurants. Check out the camping-themed restaurant a block away on the second floor - fun atmosphere with camping chairs and utensils! Also a fantastic Japanese BBQ place nearby that uses all Hiroshima produce (newly opened when we visited).
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-travel">
+                    <strong>Travel:</strong> Shinkansen to Osaka
+                </div>
+
+                <!-- Osaka -->
+                <div class="timeline-item">
+                    <div class="timeline-dot">4</div>
+                    <div class="stop-card">
+                        <div class="stop-header">
+                            <div>
+                                <h3 class="stop-title">Osaka</h3>
+                            </div>
+                            <div class="stop-dates">Oct 12 - 18 (6 nights)</div>
+                        </div>
+
+                        <div class="hotel-info hotel-neutral">
+                            <h4>🏨 Accommodation</h4>
+                            <p class="hotel-name">Ocean Niponichi (near Dontonbori)</p>
+                            <p class="recommendation">⚠️ Mixed - Location is excellent but rooms aren't great. Consider other options in the Dontonbori area</p>
+                        </div>
+
+                        <div class="activities">
+                            <h4>Things to Do</h4>
+                            <ul class="activity-list">
+                                <li class="must-see">Osaka Aquarium - Incredible! Everyone we spoke to raved about it and it absolutely lived up to the hype</li>
+                                <li class="must-see">Explore Dontonbori - Walk around endless tiny streets filled with restaurants and bars. It's crazy how much there is to discover!</li>
+                                <li class="must-see">Round1 Arcade - Perfect if you want to embrace your inner child. ~$40 for a 24-hour pass. Unreal experience</li>
+                                <li>Day trip to Kyoto - Walk around all the temples (note: very busy with tourists)</li>
+                                <li>Osaka Castle - Nice walks around the castle grounds. You can go inside if you want. Less crowded than Kyoto</li>
+                            </ul>
+                        </div>
+
+                        <div class="food-note">
+                            <strong>Why Dontonbori:</strong> This is THE area to stay in Osaka. It's a maze of tiny streets with endless restaurants and bars. You could explore for days and keep finding new places!
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -315,7 +727,61 @@
             iconAnchor: [15, 15]
         });
 
-        // Add markers for each location
+        // Custom icon for itinerary stops with numbers
+        const createNumberIcon = (number) => {
+            return L.divIcon({
+                className: 'custom-div-icon',
+                html: `<div style='background-color:#9b59b6; width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 18px; font-weight: bold; border: 3px solid white; box-shadow: 0 3px 8px rgba(0,0,0,0.4);'>${number}</div>`,
+                iconSize: [35, 35],
+                iconAnchor: [17.5, 17.5]
+            });
+        };
+
+        // Itinerary route coordinates
+        const itineraryStops = [
+            {
+                name: "Tokyo (Akasaka-Mitsuke)",
+                coords: [35.6747, 139.7377],
+                number: 1,
+                description: "Oct 1-7 (6 nights) • APA Hotel Akasaka Mitsuke"
+            },
+            {
+                name: "Nagoya",
+                coords: [35.1815, 136.9066],
+                number: 2,
+                description: "Oct 7-9 (2 nights) • Comfort Inn Nagoya Sakae"
+            },
+            {
+                name: "Hiroshima",
+                coords: [34.3853, 132.4553],
+                number: 3,
+                description: "Oct 10-12 (2 nights) • NAGI Hiroshima Hotel"
+            },
+            {
+                name: "Osaka (Dontonbori)",
+                coords: [34.6688, 135.5010],
+                number: 4,
+                description: "Oct 12-18 (6 nights) • Ocean Niponichi"
+            }
+        ];
+
+        // Add itinerary route line
+        const routeCoords = itineraryStops.map(stop => stop.coords);
+        const routeLine = L.polyline(routeCoords, {
+            color: '#9b59b6',
+            weight: 3,
+            opacity: 0.7,
+            dashArray: '10, 10'
+        }).addTo(map);
+
+        // Add numbered markers for itinerary stops
+        itineraryStops.forEach(stop => {
+            L.marker(stop.coords, { icon: createNumberIcon(stop.number) })
+                .addTo(map)
+                .bindPopup(`<strong>${stop.name}</strong><br>${stop.description}`);
+        });
+
+        // Add markers for additional recommended places
         const locations = [
             {
                 name: "Miyajima Island, Hiroshima",
@@ -324,28 +790,16 @@
                 description: "Highly recommended! Temples, old township, hiking, amazing bay views."
             },
             {
-                name: "Osaka - Dontonbori",
-                coords: [34.6688, 135.5010],
-                icon: redIcon,
-                description: "Highly recommended! Endless restaurants and bars. Stay in this area. Visit Round1 arcade."
-            },
-            {
                 name: "Kyoto",
                 coords: [35.0116, 135.7681],
                 icon: blueIcon,
                 description: "Beautiful temples but very busy. Consider a day trip from Osaka."
             },
             {
-                name: "Nagoya - Magome Pass",
+                name: "Magome Pass (from Nagoya)",
                 coords: [35.5326, 137.5989],
                 icon: blueIcon,
                 description: "Historic trade route through mountains. Beautiful walk between old villages."
-            },
-            {
-                name: "Tokyo - Akasaka Area",
-                coords: [35.6747, 139.7377],
-                icon: redIcon,
-                description: "Highly recommended area to stay! Well connected (4 metro lines), central, great restaurants."
             }
         ];
 
@@ -356,7 +810,8 @@
         });
 
         // Fit map to show all markers
-        const group = L.featureGroup(locations.map(loc => L.marker(loc.coords))).addTo(map);
+        const allCoords = [...itineraryStops.map(s => s.coords), ...locations.map(l => l.coords)];
+        const group = L.featureGroup(allCoords.map(coord => L.marker(coord))).addTo(map);
         map.fitBounds(group.getBounds().pad(0.1));
     </script>
 </body>
